@@ -5,20 +5,20 @@ const app = express();
 
 // 转发  → 用户服务
 app.use(['/api/users', '/api/personas', '/api/wechat/users'], createProxyMiddleware({
-    target: 'https://agent69-userservice.zeabur.internal',
+    target: 'http://agent69-userservice.zeabur.internal',
     changeOrigin: true
 }));
 
 
 // 转发  → 文件服务
 app.use(['/api/files', '/api/image'], createProxyMiddleware({
-    target: 'https://file-platform.zeabur.internal',
+    target: 'http://file-platform.zeabur.internal',
     changeOrigin: true
 }));
 
 // 转发  → llm服务
 app.use('/api/agent', createProxyMiddleware({
-    target: 'https://agent69-llm-service.zeabur.internal',
+    target: 'http://agent69-llm-service.zeabur.internal:8000',
     changeOrigin: true
 }));
 
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     res.json({ message: 'API Gateway is running on Zeabur!' });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Gateway listening on port ${PORT}`);
 });

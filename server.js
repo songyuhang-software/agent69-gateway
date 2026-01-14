@@ -17,7 +17,7 @@ app.use('/file-platform', createProxyMiddleware({
 }));
 
 // 转发  → llm服务
-app.use('llm-service', createProxyMiddleware({
+app.use('/llm-service', createProxyMiddleware({
     target: 'http://agent69-llm-service.zeabur.internal:8000',
     changeOrigin: true
 }));
